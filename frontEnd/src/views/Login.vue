@@ -29,7 +29,7 @@ const error = ref('')
 const handleLogin = async () => {
   try {
     await login(username.value, password.value)
-    const redirect = router.currentRoute.value.query.redirect || '/'
+    const redirect = router.currentRoute.value.query.redirect || {name: 'home'}
     router.push(redirect)
   } catch (err) {
     error.value = 'Login failed'
