@@ -74,6 +74,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET,this.baseUrl+"/crewMember").hasAuthority("ROLE_ADMIN")
                         .requestMatchers(HttpMethod.POST,this.baseUrl+"/gameSchedule").hasAuthority("ROLE_ADMIN")
                         .requestMatchers(HttpMethod.POST,this.baseUrl+"/gameSchedule/{id}/games").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, this.baseUrl + "/login").permitAll()
                         .requestMatchers((AntPathRequestMatcher.antMatcher(("/h2-console/**")))).permitAll()
                         //Disallow anything else
                         .anyRequest().authenticated()
