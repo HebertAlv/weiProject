@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("${api.endpoint.base-url}/CrewedUser")
+@RequestMapping("${api.endpoint.base-url}")
 public class crewedUserController {
 
     private final crewedUserService crewedUserService;
