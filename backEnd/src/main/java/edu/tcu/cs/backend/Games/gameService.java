@@ -18,4 +18,9 @@ public class gameService {
         return this.gamesRepository.findAll();
     }
 
+    public game save(game newGame) {
+        return this.gamesRepository.save(newGame);
+    }
+
+
 }

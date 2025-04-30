@@ -35,4 +35,20 @@ public class gameController {
                 .collect(Collectors.toList());
         return new Result(true, StatusCode.SUCCESS, "Find Success", gameDtos);
     }
+
+    @PostMapping("/gameSchedule/{id}/games")
+    public Result addGameToSchedule(@PathVariable int id, @RequestBody @Valid GameDto gameDto) {
+        // Convert DTO to entity
+        game newGame = gameDtoToGameConverter.convert(gameDto);
+        newGame.setScheduleId(id); // Associate the game with the given schedule ID
+
+        // Save the game
+        game savedGame = GamesService.save(newGame);
+
+        // Convert the saved entity back to DTO
+        GameDto savedGameDto = gameToGameDtoConverter.convert(savedGame);
+
+        // Return success response
+        return new Result(true, StatusCode.SUCCESS, "Game added to schedule successfully", savedGameDto);
+    }
 }

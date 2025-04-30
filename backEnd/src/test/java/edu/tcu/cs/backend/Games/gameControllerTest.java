@@ -93,4 +93,36 @@ class gameControllerTest {
                 .andExpect(jsonPath("$.data[0].gameId").value(1));
 
     }
+
+    @Test
+    void testAddGameToSchedule() throws Exception {
+        // Arrange
+        GameDto gameDto = new GameDto(4,1, "2023-10-04", "Stadium D", "Team E", false);
+        game newGame = new game();
+        newGame.setGameId(4);
+        newGame.setScheduleId(1);
+        newGame.setGameDate("2023-10-04");
+        newGame.setVenue("Stadium D");
+        newGame.setOpponent("Team E");
+        newGame.setIsFinalized(false);
+
+        given(gameService.save(Mockito.any(game.class))).willReturn(newGame);
+
+        String json = objectMapper.writeValueAsString(gameDto);
+
+        // Act & Assert
+        this.mockMvc.perform(post(this.baseUrl + "/gameSchedule/1/games")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.flag").value(true))
+                .andExpect(jsonPath("$.code").value(StatusCode.SUCCESS))
+                .andExpect(jsonPath("$.message").value("Game added to schedule successfully"))
+                .andExpect(jsonPath("$.data.gameId").value(4))
+                .andExpect(jsonPath("$.data.scheduleId").value(1))
+                .andExpect(jsonPath("$.data.venue").value("Stadium D"))
+                .andExpect(jsonPath("$.data.gameDate").value("2023-10-04"))
+                .andExpect(jsonPath("$.data.opponent").value("Team E"))
+                .andExpect(jsonPath("$.data.isFinalized").value(false));
+    }
 }

@@ -77,4 +77,31 @@ class gameServiceTest {
         assertThat(foundGames.size()).isEqualTo(this.games.size());
         verify(this.gameRepository, times(1)).findAll();
     }
+
+    @Test
+    void TestSaveGame() {
+        // Arrange
+        game newGame = new game();
+        newGame.setGameId(4);
+        newGame.setScheduleId(2);
+        newGame.setVenue("Stadium D");
+        newGame.setGameDate("2023-10-04");
+        newGame.setOpponent("Team E");
+        newGame.setIsFinalized(false);
+
+        given(gameRepository.save(newGame)).willReturn(newGame);
+
+        // Act
+        game savedGame = gameService.save(newGame);
+
+        // Assert
+        assertThat(savedGame).isNotNull();
+        assertThat(savedGame.getGameId()).isEqualTo(4);
+        assertThat(savedGame.getScheduleId()).isEqualTo(2);
+        assertThat(savedGame.getVenue()).isEqualTo("Stadium D");
+        assertThat(savedGame.getGameDate()).isEqualTo("2023-10-04");
+        assertThat(savedGame.getOpponent()).isEqualTo("Team E");
+        assertThat(savedGame.getIsFinalized()).isFalse();
+        verify(gameRepository, times(1)).save(newGame);
+    }
 }

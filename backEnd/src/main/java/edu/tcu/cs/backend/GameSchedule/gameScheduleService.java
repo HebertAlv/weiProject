@@ -15,8 +15,7 @@ public class gameScheduleService {
         this.gameScheduleRepository = gameScheduleRepository;
     }
 
-    public List<gameSchedule> getAllGames() {
-
-        return gameScheduleRepository.findAll();
+    public gameSchedule save(gameSchedule newGameSchedule) {
+        return gameScheduleRepository.save(newGameSchedule);
     }
 }

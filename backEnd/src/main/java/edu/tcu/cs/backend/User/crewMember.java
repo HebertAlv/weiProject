@@ -23,6 +23,10 @@ public class crewMember  implements Serializable {
 
     private String role;
 
+    private String password;
+
+    private boolean isEnabled;
+
     @ElementCollection
     private List<String> positions;
 
@@ -83,5 +87,21 @@ public class crewMember  implements Serializable {
 
     public void setPositions(List<String> positions) {
         this.positions = positions;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 }
